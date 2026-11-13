@@ -244,6 +244,8 @@ body:not([data-mode="pista"]) .pista-only { display: none !important; }
 .thead span:not(:first-child), .r span:not(:first-child) { text-align: right; }
 .rows { display: flex; flex-direction: column; gap: 3px; }
 .r {
+  /* flex: none — sin esto, con scroll interno las filas se encogen y el texto se solapa. */
+  flex: none;
   position: relative; isolation: isolate; overflow: hidden;
   padding: 10px 12px; border-radius: 12px;
   font-family: var(--mono); font-size: clamp(13px, 3.9vw, 15px); font-weight: 500; letter-spacing: -0.02em;
@@ -290,7 +292,7 @@ body[data-mode="pista"] .r:not(.km):not(.last) { background: transparent; }
   .layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
   .form { position: sticky; top: 24px; }
   .card { padding: 22px; }
-  .rows { max-height: 52vh; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; }
+  .rows { max-height: max(360px, 60vh); overflow-y: auto; overscroll-behavior: contain; padding-right: 6px; scrollbar-width: thin; }
 }
 
 @media (max-width: 360px) {
