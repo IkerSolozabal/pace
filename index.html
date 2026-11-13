@@ -68,7 +68,7 @@
             <span class="badge">Resultado</span>
           </div>
           <div class="inputs">
-            <input class="num grow" id="dist" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="distUnit">
+            <input class="num" id="dist" type="text" maxlength="9" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="distUnit">
             <span class="u" id="distUnit">km</span>
           </div>
           <div class="chips" id="presets" role="group" aria-label="Distancias habituales"></div>
@@ -80,9 +80,9 @@
             <span class="badge">Resultado</span>
           </div>
           <div class="inputs">
-            <input class="num" id="th" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Horas"><span class="u">h</span>
-            <input class="num" id="tm" type="text" inputmode="numeric" autocomplete="off" placeholder="00" aria-label="Minutos"><span class="u">m</span>
-            <input class="num" id="ts" type="text" inputmode="decimal" autocomplete="off" placeholder="00" aria-label="Segundos"><span class="u">s</span>
+            <input class="num" id="th" type="text" maxlength="3" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Horas"><span class="u">h</span>
+            <input class="num" id="tm" type="text" maxlength="2" inputmode="numeric" autocomplete="off" placeholder="00" aria-label="Minutos"><span class="u">m</span>
+            <input class="num" id="ts" type="text" maxlength="4" inputmode="decimal" autocomplete="off" placeholder="00" aria-label="Segundos"><span class="u">s</span>
           </div>
         </div>
 
@@ -97,8 +97,8 @@
             </div>
           </div>
           <div class="inputs">
-            <input class="num" id="pm" type="text" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Minutos de ritmo"><span class="u colon">:</span>
-            <input class="num" id="ps" type="text" inputmode="decimal" autocomplete="off" placeholder="00" aria-label="Segundos de ritmo">
+            <input class="num" id="pm" type="text" maxlength="2" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Minutos de ritmo"><span class="u colon">:</span>
+            <input class="num" id="ps" type="text" maxlength="4" inputmode="decimal" autocomplete="off" placeholder="00" aria-label="Segundos de ritmo">
             <span class="u" id="paceUnit">/km</span>
           </div>
         </div>
