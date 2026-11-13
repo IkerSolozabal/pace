@@ -238,14 +238,16 @@ function renderSplits(res) {
   const html = list.map((r, i) => {
     const last = i === list.length - 1 && total <= MAX_SPLITS;
     const km = Math.abs(r.d % 1000) < 1e-6 || Math.abs((r.d % 1000) - 1000) < 1e-6;
-    const label = isPista()
-      ? (km && r.d >= 1000 ? `${nf(r.d / 1000, 0)} km` : `${nf(r.d, 1)} m`)
-      : (km ? `${nf(r.d / 1000, 0)} km` : `${nf(r.d / 1000, 3)} km`);
+    const [num, unit] = isPista() && !(km && r.d >= 1000)
+      ? [nf(r.d, 1), 'm']
+      : [nf(r.d / 1000, km ? 0 : 3), 'km'];
+    const label = `${num}<small>${unit}</small>`;
     const cls = ['r', km ? 'km' : '', last ? 'last' : ''].join(' ').trim();
     return `<div class="${cls}" role="row" style="--p:${((r.d / d) * 100).toFixed(2)}%">` +
       `<span class="d" role="cell">${label}</span>` +
       `<span role="cell">${fmtClock(r.split, dec)}</span>` +
-      `<span role="cell">${fmtClock(r.cum, dec)}</span></div>`;
+      // Por encima de 1 h las décimas no aportan y ensanchan la columna.
+      `<span role="cell">${fmtClock(r.cum, r.cum >= 3600 ? 0 : dec)}</span></div>`;
   });
   if (total > MAX_SPLITS) html.push(`<div class="more">Mostrando los primeros ${MAX_SPLITS} tramos</div>`);
   el.rows.innerHTML = html.join('');

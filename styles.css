@@ -235,21 +235,30 @@ body:not([data-mode="pista"]) .pista-only { display: none !important; }
 
 /* ---------- Parciales ---------- */
 .table { font-variant-numeric: tabular-nums; }
-.thead, .r { display: grid; grid-template-columns: 1.1fr 1fr 1.1fr; gap: 8px; align-items: center; }
+/* Distancia flexible; las columnas de tiempo nunca se encogen por debajo de su contenido. */
+.thead, .r { display: grid; grid-template-columns: minmax(0, 1fr) minmax(max-content, 0.9fr) minmax(max-content, 1.1fr); column-gap: 12px; align-items: center; }
+.thead span, .r span { white-space: nowrap; }
+.r .d { overflow: hidden; text-overflow: ellipsis; }
+.r .d small { font-family: var(--font); font-size: 0.8em; font-weight: 600; margin-left: 3px; opacity: 0.75; }
 .thead { padding: 0 12px 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .thead span:not(:first-child), .r span:not(:first-child) { text-align: right; }
 .rows { display: flex; flex-direction: column; gap: 3px; }
 .r {
   position: relative; isolation: isolate; overflow: hidden;
   padding: 10px 12px; border-radius: 12px;
-  font-family: var(--mono); font-size: 15px; font-weight: 500;
+  font-family: var(--mono); font-size: clamp(13px, 3.9vw, 15px); font-weight: 500; letter-spacing: -0.02em;
   background: var(--field);
 }
 .r::before {
   content: ''; position: absolute; inset: 0 auto 0 0; z-index: -1;
   width: var(--p, 0%);
   background: linear-gradient(90deg, transparent, var(--bar));
-  border-right: 2px solid color-mix(in srgb, var(--accent-text) 35%, transparent);
+}
+/* Progreso como barra fina inferior: no cruza los números en km altos. */
+.r::after {
+  content: ''; position: absolute; left: 0; bottom: 0; z-index: -1;
+  width: var(--p, 0%); height: 2px; border-radius: 2px;
+  background: color-mix(in srgb, var(--accent-text) 55%, transparent);
 }
 .r span:last-child { font-weight: 600; }
 .r .d { color: var(--muted); }
